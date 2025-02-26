@@ -1,7 +1,71 @@
-.hex-button {
-  background-color: red;
+html {
+  background-color: black;
+  font-family: Verdana, sans-serif;
 }
 
-.hex-button.active {
-  background-color: green;
+body {
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 100;
+  font-size: 22px;
+}
+
+.calendar {
+  display: flex;
+  gap: 20px;
+  border: 20px solid #d4a62e;
+  overflow: scroll;
+  padding: 0 10px 10px;
+}
+
+.month {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  color: #d4a62e;
+  gap: 5px;
+}
+
+.hex-button {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 65px;
+  width: 65px;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  outline: inherit;
+  cursor: pointer;
+}
+
+.hex-button span {
+  position: relative;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.hex-button svg {
+  position: absolute;
+  top: 0;
+  fill: #89774a;
+}
+
+.hex-button svg path {
+  stroke: #d4a62e;
+  stroke-width: 48px;
+}
+
+.hex-button.active svg path {
+  stroke:rgb(250, 231, 60);
+}
+
+.hex-button.active span {
+  color: rgb(250, 231, 60);
 }

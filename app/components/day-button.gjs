@@ -1,31 +1,24 @@
 import Component from '@glimmer/component';
-import action from '@ember/object';
+import { action } from '@ember/object';
 import { on } from '@ember/modifier';
+import { trackedInLocalStorage } from 'ember-tracked-local-storage';
 
 export default class DayButton extends Component {
+  @trackedInLocalStorage({ defaultValue: '' }) completedDays;
+
   get isActive() {
-    const completedDays =
-      JSON.parse(localStorage.getItem('completedDays')) ?? [];
-    console.log(completedDays);
-    return completedDays.includes(this.args.id);
+    return this.completedDays.includes(`${this.args.id},`);
   }
 
   @action
   click() {
-    try {
-      let completedDays =
-        JSON.parse(localStorage.getItem('completedDays')) ?? [];
-      if (completedDays.includes(this.args.id)) {
-        completedDays = completedDays.filter((item) => item !== this.args.id);
-        localStorage.setItem('completedDays', JSON.stringify(completedDays));
-      } else {
-        completedDays.push(this.args.id);
-        completedDays = JSON.stringify(completedDays);
-        localStorage.setItem('completedDays', completedDays);
-      }
-    } catch (e) {
-      console.log(e);
-      localStorage.setItem('completedDays', []);
+    if (this.completedDays.split(',').includes(this.args.id)) {
+      this.completedDays = this.completedDays
+        .split(',')
+        .filter((item) => item !== this.args.id)
+        .join(',');
+    } else {
+      this.completedDays += `${this.args.id},`;
     }
   }
 
@@ -35,6 +28,31 @@ export default class DayButton extends Component {
       data-value={{@id}}
       type="button"
       {{on "click" this.click}}
-    >{{@number}}</button>
+    >
+      <svg
+        fill="#000000"
+        version="1.1"
+        id="Layer_1"
+        viewBox="0 0 512 512"
+        xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:svg="http://www.w3.org/2000/svg"
+      >
+        <g
+          id="g186"
+          transform="matrix(0.92070745,0,0,0.92070745,20.297972,20.294488)"
+        >
+          <g
+            id="g184"
+          >
+            <path
+              d="m 485.291,129.408 -224,-128 c -3.285,-1.877 -7.296,-1.877 -10.581,0 l -224,128 c -3.328,1.899 -5.376,5.44 -5.376,9.259 v 234.667 c 0,3.819 2.048,7.36 5.376,9.259 l 224,128 c 1.643,0.939 3.456,1.408 5.291,1.408 1.835,0 3.648,-0.469 5.291,-1.408 l 224,-128 c 3.328,-1.899 5.376,-5.44 5.376,-9.259 V 138.667 c -0.001,-3.819 -2.049,-7.36 -5.377,-9.259 z"
+              id="path182"
+            />
+          </g>
+        </g>
+      </svg>
+      <span>{{@number}}</span>
+    </button>
   </template>
 }
