@@ -1,1 +1,7 @@
-/* Ember supports plain CSS out of the box. More info: https://cli.emberjs.com/release/advanced-use/stylesheets/ */
+.hex-button {
+  background-color: red;
+}
+
+.hex-button.active {
+  background-color: green;
+}
