@@ -18,13 +18,14 @@ h1 {
   gap: 20px;
   border: 20px solid #d4a62e;
   overflow: scroll;
-  padding: 0 10px 10px;
+  padding: 0 20px 20px;
+  width: fit-content;
+  margin: 0 auto;
 }
 
 .month {
   display: flex;
   flex-direction: column;
-  width: 20%;
   color: #d4a62e;
   gap: 5px;
 }
@@ -41,8 +42,32 @@ h1 {
   border: none;
   padding: 0;
   font: inherit;
-  outline: inherit;
   cursor: pointer;
+
+}
+
+@keyframes pulse2 {
+	0% {
+    stroke: rgb(250 231 60);
+		transform: scale(1, 1);
+		opacity: 0;
+	}
+
+	50% {
+      stroke: rgb(250 231 60);
+	    opacity: 1;
+	}
+
+	100% {
+      stroke: rgb(250 231 60);
+	    transform: scale(1.2, 1.2);
+	    opacity: 0;
+		}
+	}
+
+.hex-button.today .pulse {
+  transform-origin: center;
+  animation: pulse2 1.5s ease-in-out 3;
 }
 
 .hex-button span {
@@ -55,6 +80,7 @@ h1 {
   position: absolute;
   top: 0;
   fill: #89774a;
+  overflow: visible;
 }
 
 .hex-button svg path {
@@ -63,9 +89,17 @@ h1 {
 }
 
 .hex-button.active svg path {
-  stroke:rgb(250, 231, 60);
+  stroke: rgb(250 231 60);
 }
 
 .hex-button.active span {
-  color: rgb(250, 231, 60);
+  color: rgb(250 231 60);
+}
+
+.attribution {
+  color: white;
+  background-color: #d4a62e;
+  max-width: 1039px;
+  margin: -20px auto 20px;
+  padding: 0 20px 20px;
 }
